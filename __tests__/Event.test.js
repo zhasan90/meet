@@ -6,11 +6,28 @@ import userEvent from '@testing-library/user-event';
 
 
 describe('<Event /> ', () => {
+    test('renders event summary', () => {
+        const event = mockData[0];
+        const { getByText } = render(<Event event={event} />);
+        expect(getByText(event.summary)).toBeInTheDocument();
+    });
+
+    test('renders event created date', () => {
+        const event = mockData[0];
+        const { getByText } = render(<Event event={event} />);
+        expect(getByText(event.created)).toBeInTheDocument();
+    })
+
+    test('renders event location', () => {
+        const event = mockData[0];
+        const { getByText } = render(<Event event={event} />);
+        expect(getByText(event.location)).toBeInTheDocument();
+    })
+
     test('renders event details when "Show Details" is clicked', async () => {
         const event = mockData[0];
         const user = userEvent.setup();
         const EventComponent = render(<Event event={event} />);
-        // const { getByText, queryByText } = render(<Event event={event} />);
 
         expect(EventComponent.queryByText(event.description)).not.toBeInTheDocument();
 
