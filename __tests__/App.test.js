@@ -10,7 +10,10 @@ describe("<App/> component", () => {
     test('renders list of events', () => {
         expect(AppDOM.querySelector('#events-list')).toBeInTheDocument();
     });
-    test('render CitySearch', () => {
+    test('renders CitySearch', () => {
         expect(AppDOM.querySelector('#city-search')).toBeInTheDocument();
+    });
+    test('renders number of events', () => {
+        expect(AppDOM.querySelector('#number-of-events')).toBeInTheDocument();
     });
 });
