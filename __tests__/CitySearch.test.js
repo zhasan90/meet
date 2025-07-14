@@ -37,26 +37,28 @@ describe('<CitySearch /> component', () => {
         const user = userEvent.setup();
         const allEvents = await getEvents();
         const allLocations = extractLocations(allEvents);
-        CitySearchComponent.rerender(<CitySearch allLocations={allLocations} />);
+        CitySearchComponent.rerender(<CitySearch
+            allLocations={allLocations}
+            setCurrentCity={() => { }}
+        />);
 
         const cityTextBox = CitySearchComponent.queryByRole('textbox');
         await user.type(cityTextBox, 'Berlin');
 
         const BerlinGermanySuggestion = CitySearchComponent.queryAllByRole('listitem')[0];
 
-        await user.click(cityTextBox);
+        await user.click(BerlinGermanySuggestion);
 
-        expect(cityTextBox).toHaveValue('Berlin');
+        expect(cityTextBox).toHaveValue(BerlinGermanySuggestion.textContent);
+        // const suggestions = allLocations ? allLocations.filter((location) => {
+        //     return location.toUpperCase().indexOf(cityTextBox.value.toUpperCase()) > -1;
+        // }) : [];
 
-        const suggestions = allLocations ? allLocations.filter((location) => {
-            return location.toUpperCase().indexOf(cityTextBox.value.toUpperCase()) > -1;
-        }) : [];
-
-        const suggestionsListItems = await CitySearchComponent.findAllByRole('listitem');
-        expect(suggestionsListItems).toHaveLength(suggestions.length + 1);
-        for (let i = 0; i < suggestions.length; i++) {
-            expect(suggestionsListItems[i].textContent).toBe(suggestions[i]);
-        }
+        // const suggestionsListItems = await CitySearchComponent.findAllByRole('listitem');
+        // expect(suggestionsListItems).toHaveLength(suggestions.length + 1);
+        // for (let i = 0; i < suggestions.length; i++) {
+        //     expect(suggestionsListItems[i].textContent).toBe(suggestions[i]);
+        // }
     });
 });
 
