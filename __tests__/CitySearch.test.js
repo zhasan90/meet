@@ -50,15 +50,6 @@ describe('<CitySearch /> component', () => {
         await user.click(BerlinGermanySuggestion);
 
         expect(cityTextBox).toHaveValue(BerlinGermanySuggestion.textContent);
-        // const suggestions = allLocations ? allLocations.filter((location) => {
-        //     return location.toUpperCase().indexOf(cityTextBox.value.toUpperCase()) > -1;
-        // }) : [];
-
-        // const suggestionsListItems = await CitySearchComponent.findAllByRole('listitem');
-        // expect(suggestionsListItems).toHaveLength(suggestions.length + 1);
-        // for (let i = 0; i < suggestions.length; i++) {
-        //     expect(suggestionsListItems[i].textContent).toBe(suggestions[i]);
-        // }
     });
 });
 
