@@ -51,7 +51,7 @@ export const getEvents = async () => {
 
     if (token) {
         removeQuery();
-        const url = "YOUR_GET_EVENTS_API_ENDPOINT" + "/" + token;
+        const url = "https://q13rgiwvbc.execute-api.eu-central-1.amazonaws.com/dev/api/get-calendar-events/{access_token}" + "/" + token;
         const response = await fetch(url);
         const result = await response.json();
         if (result) {
