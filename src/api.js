@@ -7,18 +7,10 @@ export const extractLocations = (events) => {
     return locations;
 };
 
-const checkToken = async (accessToken) => {
-    const response = await fetch(
-        `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
-    );
-    const result = await response.json();
-    return result;
-};
-
 const getToken = async (code) => {
     const encodeCode = encodeURIComponent(code);
     const response = await fetch(
-        'https://q13rgiwvbc.execute-api.eu-central-1.amazonaws.com/dev/api/get-access-token/{code}' + '/' + encodeCode
+        'https://q13rgiwvbc.execute-api.eu-central-1.amazonaws.com/dev/api/get-access-token' + '/' + encodeCode
     );
     const { access_token } = await response.json();
     access_token && localStorage.setItem("access_token", access_token);
@@ -42,6 +34,14 @@ const removeQuery = () => {
     }
 };
 
+const checkToken = async (accessToken) => {
+    const response = await fetch(
+        `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
+    );
+    const result = await response.json();
+    return result;
+};
+
 export const getEvents = async () => {
     if (window.location.href.startsWith("http://localhost")) {
         return mockData;
@@ -51,7 +51,7 @@ export const getEvents = async () => {
 
     if (token) {
         removeQuery();
-        const url = "https://q13rgiwvbc.execute-api.eu-central-1.amazonaws.com/dev/api/get-calendar-events/{access_token}" + "/" + token;
+        const url = "https://q13rgiwvbc.execute-api.eu-central-1.amazonaws.com/dev/api/get-calendar-events" + "/" + token;
         const response = await fetch(url);
         const result = await response.json();
         if (result) {
@@ -71,7 +71,7 @@ export const getAccessToken = async () => {
         const code = await searchParams.get("code");
         if (!code) {
             const response = await fetch(
-                "https://q13rgiwvbc.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-mazonaws.com/dev/api/gmazonaws.com/dev/api/get-auth-url"
+                "https://q13rgiwvbc.execute-api.eu-central-1.amazonaws.com/dev/api/get-auth-url"
             );
             const result = await response.json();
             const { authUrl } = result;
