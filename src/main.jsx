@@ -1,3 +1,6 @@
+import * as atatus from 'atatus-spa';
+atatus.config('1ada05214e5845a9811ffdba8101df3d').install();
+
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
@@ -8,3 +11,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <App />
   </React.StrictMode>,
 )
+
